@@ -65,3 +65,28 @@ pub(crate) fn run_command(program: &str, args: &[&str]) -> Result<()> {
     }
     Ok(())
 }
+
+pub struct GoSourceFormatter {
+    program: String,
+}
+
+impl Default for GoSourceFormatter {
+    fn default() -> Self {
+        GoSourceFormatter {
+            program: "gofmt".to_string(),
+        }
+    }
+}
+
+impl SourceFormatter for GoSourceFormatter {
+    fn run(&self, source_files: &[&str]) -> Result<()> {
+        let mut args = vec!["-w"];
+        args.extend(source_files.iter());
+        run_command(&self.program, &args)?;
+        Ok(())
+    }
+
+    fn include(&self, path: &std::path::Path) -> bool {
+        crate::codegen_go::is_go_source(path)
+    }
+}

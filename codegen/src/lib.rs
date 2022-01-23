@@ -2,6 +2,7 @@
 
 mod error;
 pub use error::{Error, Result};
+pub(crate) mod codegen_go;
 #[cfg(feature = "cbor")]
 pub(crate) mod codegen_py;
 pub(crate) mod codegen_rust;

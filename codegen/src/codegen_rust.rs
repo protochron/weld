@@ -894,7 +894,7 @@ impl<'model> RustCodeGen<'model> {
                   pub fn via(transport: T) -> Self {{
                       Self{{ transport }}
                   }}
-                  
+
                   pub fn set_timeout(&self, interval: std::time::Duration) {{
                     self.transport.set_timeout(interval);
                   }}
